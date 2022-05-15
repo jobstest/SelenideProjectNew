@@ -6,8 +6,8 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 
@@ -22,11 +22,11 @@ public class SoftAssertionsTest {
         step(" Перейти в раздел Wiki проекта", () ->
                 $("#wiki-tab").click());
         step("Проверить наличие ссылки SoftAssertions", () ->
-                $$(".markdown-body").find(visible).shouldHave(text("Soft assertions")));
+                $$("#wiki-body").first().$("ul").$("li").sibling(4).shouldHave(text("Soft assertions")));
         step("Открыть страницу  SoftAssertions", () ->
-                $$("a").findBy(text("Soft assertions")).click());
+                $(byTagAndText("a","Soft assertions")).click());
         step("Проверить, что внутри есть пример кода для JUnit5", () ->
-                $$("#wiki-body").find(visible).shouldHave(text("Using JUnit5 extend test class")));
+                $(withTagAndText("h4", "Using JUnit5 extend test class")).shouldBe(visible));
     }
 
     @Test
