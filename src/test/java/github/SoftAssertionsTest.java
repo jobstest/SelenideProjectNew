@@ -21,10 +21,10 @@ public class SoftAssertionsTest {
                 open("https://github.com/selenide/selenide"));
         step(" Перейти в раздел Wiki проекта", () ->
                 $("#wiki-tab").click());
-        step("Проверить наличие ссылки SoftAssertions", () ->
-                $$("#wiki-body").first().$("ul").$("li").sibling(4).shouldHave(text("Soft assertions")));
-        step("Открыть страницу  SoftAssertions", () ->
-                $(byTagAndText("a","Soft assertions")).click());
+        step("Нажать на кнопку Show 2 more pages", () ->
+                $(withTagAndText("button", "more")).click());
+        step("Проверить наличие ссылки SoftAssertions и нажать на нее", () ->
+                $("#wiki-pages-box").$(byText(("SoftAssertions"))).shouldBe(visible).click());
         step("Проверить, что внутри есть пример кода для JUnit5", () ->
                 $(withTagAndText("h4", "Using JUnit5 extend test class")).shouldBe(visible));
     }
